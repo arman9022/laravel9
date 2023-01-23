@@ -34,6 +34,31 @@ toastr.info
 toastr.warning          
 toastr.clear
           
+toastr.options = {
+  "closeButton": false,
+  "debug": false,
+  "newestOnTop": false,
+  "progressBar": true,
+  "positionClass": "toast-top-right",
+  "preventDuplicates": true,
+  "onclick": null,
+  "showDuration": "300",
+  "hideDuration": "1000",
+  "timeOut": "5000",
+  "extendedTimeOut": "1000",
+  "showEasing": "swing",
+  "hideEasing": "linear",
+  "showMethod": "fadeIn",
+  "hideMethod": "fadeOut"
+}
+          
+public function index()
+{   
+    session()->put('success','Item Successfully Created.');
+    return view('toastrCheck');
+}
+toastr.success("{{ Session::get('success') }}");
+          
 composer require brian2694/laravel-toastr
 <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
