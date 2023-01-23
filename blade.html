@@ -34,6 +34,7 @@
 @endif
 
 value="{{ Auth::user()->id }}"
+value="{{Auth::check() ? Auth::user()->name : ''}}"
 {{ Auth::user()->name }}
 
 <div class="row">
