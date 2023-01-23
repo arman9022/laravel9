@@ -11,7 +11,30 @@
   <body>
     <div class="container pt-4">
       <div class="row">
-        <textarea cols="200" rows="20" class="form-control">                                                      
+        <textarea cols="200" rows="20" class="form-control">
+class Clash extends Model
+{
+    use HasFactory;
+    public function subject(){
+        return $this->belongsTo(Subject::class);
+    }
+    public static function totalClashs(){
+        $clashs = Clash::select('*')
+                ->orderBy('id', 'DESC')
+                ->get();
+        return $clashs;
+    }
+}
+          
+@foreach(App\Models\Clash::totalClashs() as $clash)
+<tr>
+    <td>{{$clash->title}}</td>
+    <td>{{$clash->subject->title}}</td>
+</tr>
+@endforeach
+          
+          
+          
 use Illuminate\Database\Eloquent\Profile;
 
 class Profile extends Model
