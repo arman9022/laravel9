@@ -44,7 +44,13 @@ public function store(Request $request)
     <div class="alert alert-danger">{{ $message }}</div>
 @enderror
 
-
+$this->validate($request, [
+    'course_id'=>'required'
+],
+[
+    'course_id.required'=>'Please give a Course'    
+]);
+          
         </textarea>
       </div>
     </div>
