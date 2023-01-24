@@ -71,6 +71,134 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     </body>
 </html> 
+          
+          
+          
+          
+          
+          
+          
+          
+          
+@extends('layouts.admin')
+
+@section('css')
+<!--toastr css-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+@endsection
+
+@section('content')
+
+<section class="main">
+    <div class="container py-4">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <a href="" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#create_counrty_Modal">Create A New Country</a>
+              
+              <!-- Apply Now Modal -->
+              <div class="modal fade" id="create_counrty_Modal" tabindex="-1" aria-labelledby="create_counrty_ModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="create_counrty_ModalLabel">Create A New Country</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                        <form action="{{route('country.store')}}" method="post" enctype="multipart/form-data" class="p-2">
+                            @csrf
+                              <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="form-label">Name</label>
+                                        <input type="text" name="name" value="{{ old('name') }}" class="form-control">
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <label class="form-label">Logo</label>
+                                        <input type="file" name="image" class="form-control">
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <label class="form-label">Banner</label>
+                                        <input type="file" name="image2" class="form-control">
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-success fw-bold">ADD</button>
+                              </div>
+                        </form>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">{{ __('Country List') }}</div>
+      
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Logo</th>
+                                        <th scope="col">Banner</th>
+                                        <th scope="col" style="text-align:center;">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="table-group-divider">
+                                    @foreach($all_data as $data)
+                                    <tr>
+                                        <td>{{$data->name}}</td>
+                                        <td><img src="{{ asset('images/country/'.$data->image) }}" style="width:100px;height:80px;"></td>
+                                        <td><img src="{{ asset('images/country/'.$data->image2) }}" style="width:100px;height:80px;"></td>
+                                        <td class="d-flex justify-content-center">
+                                            <a href="{{route('country.edit',$data->id)}}" class="btn btn-success mb-1 mx-2">Edit</a>
+                                            <a href="{{route('country.delete',$data->id)}}" class="btn btn-danger mb-1">Delete</a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@endsection
+
+@section('js')
+<!--ajax js-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!--toastr js-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+        @if(Session::has('success'))
+            toastr.options={
+                "closeButton":true,
+                "progressBar":true,
+            }
+            toastr.success("{{ session('success')}}")
+        @endif
+        @if(Session::has('update'))
+            toastr.options={
+                "closeButton":true,
+                "progressBar":true,
+            }
+            toastr.success("{{ session('update')}}")
+        @endif
+        @if(Session::has('delete'))
+            toastr.options={
+                "closeButton":true,
+                "progressBar":true,
+            }
+            toastr.error("{{ session('delete')}}")
+        @endif
+</script>
+@endsection
+          
+          
+          
         </textarea>
       </div>
     </div>
