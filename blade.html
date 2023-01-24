@@ -32,7 +32,8 @@
     @endauth
 </ul>
 @endif
-
+          
+{{Str::limit($country1->name,3)}}
 value="{{ Auth::user()->id }}"
 value="{{Auth::check() ? Auth::user()->name : ''}}"
 {{ Auth::user()->name }}
