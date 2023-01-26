@@ -27,6 +27,20 @@ return redirect()->back()->with('success','Added Successfully Done');
         }
         toastr.success("{{ session('success')}}")
     @endif
+    @if(Session::has('update'))
+        toastr.options={
+            "closeButton":true,
+            "progressBar":true,
+        }
+        toastr.success("{{ session('update')}}")
+    @endif
+    @if(Session::has('delete'))
+        toastr.options={
+            "closeButton":true,
+            "progressBar":true,
+        }
+        toastr.error("{{ session('delete')}}")
+    @endif
 </script>
           
 toastr.error          
