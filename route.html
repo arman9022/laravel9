@@ -17,13 +17,13 @@ Route::view('/','welcomeNew');
   
 use App\Http\Controllers\CrudController; 
 Route::prefix('crud')->group(function () {
-    Route::get('/', [CrudController::class, 'index']);
-    Route::get('/create', [CrudController::class, 'create']);
-    Route::post('/store', [CrudController::class, 'store']);
-    Route::get('/show/{id}', [CrudController::class, 'show']);
-    Route::get('/edit/{id}', [CrudController::class,'edit']);
-    Route::put('/update/{id}', [CrudController::class, 'update']);
-    Route::get('/delete/{id}', [CrudController::class, 'delete']);
+    Route::get('/', [CrudController::class, 'index'])->name('index');
+    Route::get('/create', [CrudController::class, 'create'])->name('create');
+    Route::post('/store', [CrudController::class, 'store'])->name('store');
+    Route::get('/show/{id}', [CrudController::class, 'show'])->name('show');
+    Route::get('/edit/{id}', [CrudController::class,'edit'])->name('edit');
+    Route::put('/update/{id}', [CrudController::class, 'update'])->name('update');
+    Route::get('/delete/{id}', [CrudController::class, 'delete'])->name('delete');
 });
 
 use App\Http\Controllers\ProfileController;       
