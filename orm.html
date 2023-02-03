@@ -12,6 +12,7 @@
     <div class="container pt-4">
       <div class="row">
         <textarea cols="200" rows="20" class="form-control"> 
+Delete er jonno
 MODEL
 class Course extends Model
 {
@@ -29,6 +30,26 @@ public function deleteCourse($id){
     $data->delete();                                               
     return redirect()->back()->with('delete', 'Deleted Successfully Done');
 }
+          
+Show koranor jonno
+MODEL
+class Course extends Model
+{
+    use HasFactory;
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+    public static function courses(){
+        $all_course = Course::select('*')->orderBy('id', 'DESC')->get();
+        return $all_course;
+    }
+}
+BLADE
+@foreach(App\Models\Course::courses() as $course)
+          {{$course->title}}
+          {{$course->user->name}}
+@endforeach
+          
         </textarea>
       </div>
     </div>
