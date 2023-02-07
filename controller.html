@@ -175,6 +175,15 @@ public function teacherPersonal($email){
 
   return view('teacher.chat.single', ['email' => $email], compact('peronal_chats'));
 }
+          
+Ajker Date Auto niye nibe
+use Carbon\Carbon;
+if(!empty($request->date)){
+  $credit->r_date=$request->date;
+}
+else{
+  $credit->r_date= Carbon::today();
+}
         </textarea>
       </div>
     </div>
