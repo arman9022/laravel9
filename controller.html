@@ -186,7 +186,9 @@ else{
 }
           
           
-RESIZE     
+RESIZE    
+composer require intervention/image
+use Image;
     public function categoryStore(Request $request)
     {
         $all_data = new Category;
