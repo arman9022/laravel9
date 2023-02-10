@@ -184,6 +184,24 @@ if(!empty($request->date)){
 else{
   $credit->r_date= Carbon::today();
 }
+          
+          
+RESIZE     
+    public function categoryStore(Request $request)
+    {
+        $all_data = new Category;
+        $all_data ->name= $request->name;
+        if($request->hasfile('image')){
+            $file = $request->file('image');
+            $name = $file->getClientOriginalName();
+            $path = public_path('/images/category');
+            $img = Image::make($file->path());
+            $img->resize(300, 300)->save($path.'/'.$name);
+            $all_data->image = $name;
+        }
+        $all_data->save();
+        return redirect()->back()->with('success', 'Deleted Successfully');
+    }
         </textarea>
       </div>
     </div>
